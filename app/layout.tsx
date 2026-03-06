@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   description: "Experience the best in tech with DADO Shop.",
 };
 
+import { ChatFloatingButton } from "@/components/ChatFloatingButton";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,6 +36,7 @@ export default function RootLayout({
           <CartProvider>
             <Header />
             {children}
+            <ChatFloatingButton />
           </CartProvider>
         </AuthProvider>
       </body>

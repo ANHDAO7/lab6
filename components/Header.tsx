@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Sparkles } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 
@@ -31,6 +31,10 @@ export function Header() {
 
                 <nav className="hidden md:flex items-center gap-8">
                     <Link href="/" className="text-sm font-bold text-[#475467] hover:text-[#F36F21] transition-colors">Home</Link>
+                    <Link href="/ai" className="text-sm font-bold text-[#475467] hover:text-[#F36F21] transition-colors flex items-center gap-1.5">
+                        <Sparkles className="w-4 h-4 text-[#F36F21]" />
+                        AI Helper
+                    </Link>
                     {mounted && user && (
                         <Link href="/orders" className="text-sm font-bold text-[#475467] hover:text-[#F36F21] transition-colors">My Orders</Link>
                     )}

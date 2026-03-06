@@ -23,19 +23,22 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-    const [cart, setCart] = useState<CartItem[]>([]);
-    const [isInitialized, setIsInitialized] = useState(false);
-
-    // Initial load from Local Storage
-    useEffect(() => {
-        const savedCart = localStorage.getItem("dado_cart");
-        if (savedCart) {
-            try {
-                setCart(JSON.parse(savedCart));
-            } catch (e) {
-                console.error("Failed to parse cart from localStorage", e);
+    const [cart, setCart] = useState<CartItem[]>(() => {
+        if (typeof window !== "undefined") {
+            const savedCart = localStorage.getItem("dado_cart");
+            if (savedCart) {
+                try {
+                    return JSON.parse(savedCart);
+                } catch (e) {
+                    console.error("Failed to parse cart from localStorage", e);
+                }
             }
         }
+        return [];
+    });
+    const [isInitialized, setIsInitialized] = useState(false);
+
+    useEffect(() => {
         setIsInitialized(true);
     }, []);
 
