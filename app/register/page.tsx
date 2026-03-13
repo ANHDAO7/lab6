@@ -98,7 +98,11 @@ export default function RegisterPage() {
           <Alert className="mb-6 border-green-500 bg-green-50 text-green-700 animate-in fade-in slide-in-from-top-4">
             <CheckCircle2 className="h-4 w-4 text-green-600" />
             <AlertTitle>Success</AlertTitle>
-            <AlertDescription>Account created successfully!</AlertDescription>
+            <AlertDescription>
+              Account created successfully! 
+              <br />
+              <strong className="text-orange-600">Please check your email to confirm your account before logging in.</strong>
+            </AlertDescription>
           </Alert>
         )}
 

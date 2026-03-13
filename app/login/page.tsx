@@ -45,9 +45,12 @@ function LoginForm() {
         });
 
         if (error) {
-            const friendlyMessage = error.message === "Invalid login credentials"
-                ? "Email hoặc mật khẩu không chính xác."
-                : error.message;
+            let friendlyMessage = error.message;
+            if (error.message === "Invalid login credentials") {
+                friendlyMessage = "Email hoặc mật khẩu không chính xác.";
+            } else if (error.message.includes("Email not confirmed")) {
+                friendlyMessage = "Email của bạn chưa được xác nhận. Vui lòng kiểm tra hộp thư đến.";
+            }
             setErrorMessage(friendlyMessage);
             setStatus("error");
         } else {
