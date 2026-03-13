@@ -11,7 +11,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { supabase } from "@/lib/supabase";
+import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 
 const loginSchema = z.object({
     email: z.string().min(1, "Email is required").email("Invalid email address"),
@@ -38,6 +38,12 @@ function LoginForm() {
     const onSubmit = async (data: LoginValues) => {
         setStatus("loading");
         setErrorMessage("");
+
+        if (!isSupabaseConfigured) {
+            setErrorMessage("Lỗi cấu hình: Bạn chưa thêm biến môi trường (Environment Variables) trên Vercel Dashboard.");
+            setStatus("error");
+            return;
+        }
 
         const { error } = await supabase.auth.signInWithPassword({
             email: data.email,
